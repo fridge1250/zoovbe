@@ -1,4 +1,6 @@
+using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovePlayer : MonoBehaviour
@@ -8,13 +10,16 @@ public class MovePlayer : MonoBehaviour
     [SerializeField] Vector2 Movement;
     [SerializeField] private Camera cam;
     [SerializeField] Vector2 MousePos;
+
+    //[SerializeField] private float hp = 10;
     // здоровье игрока 
+    /*
     [SerializeField] private int Numofhearts;
     [SerializeField] private float health;
     [SerializeField] Image[] hearts;
     [SerializeField] private Sprite Fullhearts;
     [SerializeField] private Sprite Emptyhearts;
-    
+    */
 
     void Update()
     {
@@ -23,8 +28,21 @@ public class MovePlayer : MonoBehaviour
 
         MousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        /*if(collision.gameObject.CompareTag("zoombe"))
+        {
+            hp -= 1f * Time.deltaTime;
+        }
+        if(hp == 0)
+        {
+            SceneManager.LoadScene(0);
+        }
+        */
+    }
     void FixedUpdate()
     {
+        
         if(health > Numofhearts)
         {
             health = Numofhearts;
@@ -48,6 +66,7 @@ public class MovePlayer : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+        
         //health += Time.deltaTime * heart;
         Rigidbody.MovePosition(Rigidbody.position + Movement * Speed * Time.fixedDeltaTime);
 

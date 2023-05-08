@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class shooting : MonoBehaviour
@@ -19,5 +20,13 @@ public class shooting : MonoBehaviour
         GameObject bulet = Instantiate(bullet, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bulet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+    }
+
+    private void OnCollisionEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("zoombe"))
+        {
+            Destroy(bullet);
+        }
     }
 }
