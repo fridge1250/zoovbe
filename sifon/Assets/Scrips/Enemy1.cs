@@ -8,7 +8,7 @@ public class Enemy1 : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            HeartsSystem.health -= 1;
+            
         }
     }
 }

@@ -21,12 +21,4 @@ public class shooting : MonoBehaviour
         Rigidbody2D rb = bulet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
     }
-
-    private void OnCollisionEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("zoombe"))
-        {
-            Destroy(bullet);
-        }
-    }
 }

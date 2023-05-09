@@ -20,6 +20,17 @@ public class MovePlayer : MonoBehaviour
     [SerializeField] private Sprite Fullhearts;
     [SerializeField] private Sprite Emptyhearts;
     */
+    private void OnCollisionEnter2D(Collision2D coll)
+    {
+        if(coll.transform.tag == "zoombe")
+        {
+            HeartsSystem.health--;
+            if(HeartsSystem.health < 0)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+    }
 
     void Update()
     {
@@ -28,7 +39,7 @@ public class MovePlayer : MonoBehaviour
 
         MousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
         /*if(collision.gameObject.CompareTag("zoombe"))
         {
@@ -38,11 +49,12 @@ public class MovePlayer : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        */
+        
     }
+    */
     void FixedUpdate()
     {
-        
+        /*
         if(health > Numofhearts)
         {
             health = Numofhearts;
@@ -66,6 +78,7 @@ public class MovePlayer : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+        */
         
         //health += Time.deltaTime * heart;
         Rigidbody.MovePosition(Rigidbody.position + Movement * Speed * Time.fixedDeltaTime);

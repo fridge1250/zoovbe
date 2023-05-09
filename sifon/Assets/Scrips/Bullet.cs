@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject bullet;
+    private void OnCollisionEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("zoombe"))
+        {
+            Destroy(bullet);
+        }
     }
-
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 }
