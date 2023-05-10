@@ -104,6 +104,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0}
   speed: 5
   zoo: {fileID: 0}
+  player1: {fileID: 0}
 --- !u!50 &7053961270096927893
 Rigidbody2D:
   serializedVersion: 4

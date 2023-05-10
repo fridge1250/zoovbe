@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private Transform player;
+    public Transform player;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Vector2 movement;
     [SerializeField] private int speed = 5;
     //[SerializeField] private float Hearts = 5;
-    [SerializeField] private GameObject zoo;
+    public GameObject zoo;
+    
 
     void Start()
     {
-        
+        player = GameObject.FindWithTag("Clay").GetComponent<zoombe_Clay>().player;
+        zoo = GameObject.FindWithTag("Clay").GetComponent<zoombe_Clay>().zoo;
 
         rb = this.GetComponent<Rigidbody2D>();
     }
@@ -33,14 +35,11 @@ public class Enemy : MonoBehaviour
         rb.MovePosition((Vector2)transform.position + (direction * speed * Time.deltaTime));
 
     }
-    public void OnCollisionEnter2D(UnityEngine.Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("bullet"))
         {
             Destroy(zoo);
         }
-        
-        
     }
-    
 }
