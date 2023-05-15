@@ -12,9 +12,9 @@ namespace ZombieTestProject.Extensions
 
         Vector2 cameraBoundsMax = new Vector2(camera.transform.position.x + cameraWidth / 2f, camera.transform.position.y + cameraHeight / 2f);
 
-       float x = Random.Range(-cameraBoundsMax.x, cameraBoundsMax.x) + Random.Range(-offset, offset);
+       float x = Random.Range(-cameraBoundsMax.x, cameraBoundsMax.x) - Random.Range(-offset, offset);
 
-       float y = Random.Range(-cameraBoundsMax.y, cameraBoundsMax.y) + Random.Range(-offset, offset);
+       float y = Random.Range(-cameraBoundsMax.y, cameraBoundsMax.y) - Random.Range(-offset, offset);
 
        return new Vector2(x, y);
         }

@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
     {
         Transform container = new GameObject("ZombieContainer").transform;
 
-        _pool = new PoolMono<Enemy>(_prefab, container, 30, true);
+        _pool = new PoolMono<Enemy>(_prefab, container, 60, true);
 
         
 
@@ -53,7 +53,7 @@ public class Spawner : MonoBehaviour
 
             var newPrefab = _pool.GetFreeElement();
 
-            newPrefab.transform.position = Camera.main.GetRandomPosition(20);
+            newPrefab.transform.position = Camera.main.GetRandomPosition(50);
 
             
         }
