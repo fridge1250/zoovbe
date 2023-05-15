@@ -3,6 +3,7 @@ namespace ZombieTestProject.Core
 using UnityEngine;
 using Siphoin.Pooling;
 using ZombieTestProject.SO;
+using ZombieTestProject.Interfaces;
 
     public class Shooting : MonoBehaviour
    {
@@ -32,11 +33,13 @@ using ZombieTestProject.SO;
 
     private void Shoot()
     {
-        Bullet bullet = _pool.GetFreeElement();
+        IBullet bullet = _pool.GetFreeElement();
 
-        bullet.transform.position = _firePoint.position;
+        bullet.SetPosition(_firePoint.position);
 
-        bullet.transform.rotation = _firePoint.rotation;
+        bullet.SetRotation(_firePoint.rotation);
+
+        bullet.Activate();
     }
 }
 

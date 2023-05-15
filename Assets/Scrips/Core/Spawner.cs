@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using Siphoin.Pooling;
-using Unity.VisualScripting;
 using UnityEngine;
 using ZombieTestProject.Extensions;
-
+namespace ZombieTestProject.Core
+{
 public class Spawner : MonoBehaviour
 {
     private PoolMono<Enemy> _pool;
@@ -21,6 +20,8 @@ public class Spawner : MonoBehaviour
         Transform container = new GameObject("ZombieContainer").transform;
 
         _pool = new PoolMono<Enemy>(_prefab, container, 30, true);
+
+        
 
         ActivateSpawn();
     }
@@ -52,9 +53,12 @@ public class Spawner : MonoBehaviour
 
             var newPrefab = _pool.GetFreeElement();
 
-            newPrefab.transform.position = Camera.main.GetRandomPosition();
+            newPrefab.transform.position = Camera.main.GetRandomPosition(20);
+
+            
         }
 
         
     }
+}
 }

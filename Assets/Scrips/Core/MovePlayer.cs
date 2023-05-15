@@ -9,6 +9,8 @@ public class MovePlayer : MonoBehaviour
     [SerializeField] public Rigidbody2D Rigidbody;
     [SerializeField] Vector2 Movement;
     [SerializeField] Vector2 MousePos;
+
+    
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if(coll.transform.tag == "zoombe")

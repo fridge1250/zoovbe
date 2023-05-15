@@ -1,9 +1,12 @@
 namespace ZombieTestProject.Interfaces
 {
+using UnityEngine;
     public interface IBullet
     {
-        void SetForce(int value);
+        void Activate();
 
-        void SetDamage(int value);
+        void SetRotation(Quaternion quaternion);
+
+        void SetPosition(Vector3 position);
     }
 }

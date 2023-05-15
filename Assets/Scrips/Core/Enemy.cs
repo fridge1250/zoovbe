@@ -1,42 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Enemy : MonoBehaviour
+namespace ZombieTestProject.Core
 {
-    public Transform player;
-    [SerializeField] private Rigidbody2D rb;
+using UnityEngine;
+using System;
+public abstract class Enemy : MonoBehaviour
+{
+    private Player _player;
+    [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private Vector2 movement;
     [SerializeField] private int speed = 5;
-    public GameObject zoo;
     
 
-    void Start()
+    private void Start()
     {
+        if (!TryGetComponent(out _rigidbody)) 
+        {
+            throw new NullReferenceException("enemy must have component Rigidbody2D");
+        }
 
-        rb = this.GetComponent<Rigidbody2D>();
-    }
-    void Update()
-    {   
-        Vector3 direction = player.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        direction.Normalize();
-        movement = direction;
+        _player = FindObjectOfType<Player>();
     }
     private void FixedUpdate()
     {
-        MoveChar(movement);
+        if (_player && Vector2.Distance(_player.transform.position, transform.position) > 1f) 
+        {
+            Vector2 playerPosition = _player.transform.position;
+        Vector3 direction = _player.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        direction.Normalize();
+        movement = direction;
+        Move(movement);
+        _rigidbody.rotation = angle;
+        }
+
+        // rotating
     }
-    private void MoveChar(Vector2 direction)
+    private void Move(Vector2 direction)
     {
-        rb.MovePosition((Vector2)transform.position + (direction * speed * Time.deltaTime));
+        _rigidbody.MovePosition((Vector2)transform.position + (direction * speed * Time.deltaTime));
 
     }
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("bullet"))
-        {
-            Destroy(zoo);
-        }
-    }
+}
+
 }

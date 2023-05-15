@@ -3,7 +3,7 @@ namespace ZombieTestProject.Core.Enemies
     using UnityEngine;
     using ZombieTestProject.Interfaces;
 
-    public class Zombie : MonoBehaviour, IEnemy
+    public class Zombie : Enemy, IEnemy
     {
         public void Attack()
         {
