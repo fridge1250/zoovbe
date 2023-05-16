@@ -1,6 +1,7 @@
 using System.Collections;
 using Siphoin.Pooling;
 using UnityEngine;
+using Zenject;
 using ZombieTestProject.Extensions;
 namespace ZombieTestProject.Core
 {
@@ -13,6 +14,7 @@ public class Spawner : MonoBehaviour
     [SerializeField, Min(0.5f)] private float _time = 0.5f;
 
     [SerializeField, Min(0.01f)] private float _offset = 0.01f;
+    
 
 
     void Start()
@@ -54,6 +56,17 @@ public class Spawner : MonoBehaviour
             var newPrefab = _pool.GetFreeElement();
 
             newPrefab.transform.position = Camera.main.GetRandomPosition(50);
+
+            try
+            {
+               // var container = ProjectContext.Instance.Container;container.Inject(newPrefab);
+            }
+            finally
+            {
+                
+            }
+
+            
 
             
         }

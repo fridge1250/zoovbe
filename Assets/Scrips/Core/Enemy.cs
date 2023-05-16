@@ -2,22 +2,23 @@ namespace ZombieTestProject.Core
 {
 using UnityEngine;
 using System;
-public abstract class Enemy : MonoBehaviour
+using Zenject;
+
+    public abstract class Enemy : MonoBehaviour
 {
-    private Player _player;
-    [SerializeField] private Rigidbody2D _rigidbody;
+   [SerializeField] private Player _player;
+    private Rigidbody2D _rigidbody;
     [SerializeField] private Vector2 movement;
     [SerializeField] private int speed = 5;
-    
 
+    
+    protected void SetPlayer(Player player) => _player = player;
     private void Start()
     {
         if (!TryGetComponent(out _rigidbody)) 
         {
             throw new NullReferenceException("enemy must have component Rigidbody2D");
         }
-
-        _player = FindObjectOfType<Player>();
     }
     private void FixedUpdate()
     {
@@ -31,8 +32,6 @@ public abstract class Enemy : MonoBehaviour
         Move(movement);
         _rigidbody.rotation = angle;
         }
-
-        // rotating
     }
     private void Move(Vector2 direction)
     {
