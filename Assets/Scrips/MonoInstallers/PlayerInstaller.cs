@@ -6,10 +6,13 @@ using ZombieTestProject.Core;
     
     public class PlayerInstaller : MonoInstaller
     {
-        [SerializeField] private Player _player;
+        [SerializeField] private Player _playerPrefab;
+        [SerializeField] private Transform _startPoint;
         public override void InstallBindings()
-        {        
-            Container.Bind<Player>().FromComponentOn(_player.gameObject).AsSingle();
+        {
+            var player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab, _startPoint);
+
+            Container.Bind<Player>().FromComponentOn(player.gameObject).AsSingle();
         }
     }
 }

@@ -3,27 +3,46 @@ using Siphoin.Pooling;
 using UnityEngine;
 using Zenject;
 using ZombieTestProject.Extensions;
+using System;
+using ZombieTestProject.SO;
 namespace ZombieTestProject.Core
 {
-public class Spawner : MonoBehaviour
+public class Spawner : MonoInstaller
 {
     private PoolMono<Enemy> _pool;
 
-    [SerializeField] private Enemy _prefab;
+    private Enemy _prefab;
 
-    [SerializeField, Min(0.5f)] private float _time = 0.5f;
-
-    [SerializeField, Min(0.01f)] private float _offset = 0.01f;
+    [SerializeField] private SpawnerParams _params;
     
-
-
-    void Start()
+    public override void InstallBindings() 
     {
+        if (!_params) 
+        {
+            throw new NullReferenceException("spawner params not seted");
+        }
+
+        if (!_params.Prefab.TryGetComponent(out _prefab)) 
+        {
+            throw new NullReferenceException($"invalid prefab on {_params.name}");
+        }
+
         Transform container = new GameObject("ZombieContainer").transform;
 
-        _pool = new PoolMono<Enemy>(_prefab, container, 60, true);
 
+        Enemy[] enemies = new Enemy[_params.StartCount];
         
+
+        for (int i = 0; i < _params.StartCount; i++)
+        {
+            enemies[i] = Container.InstantiatePrefabForComponent<Enemy>(_prefab);
+        }
+
+        _pool = new PoolMono<Enemy>(_prefab, enemies, container);
+    }
+
+    private void Start()
+    {
 
         ActivateSpawn();
     }
@@ -51,20 +70,11 @@ public class Spawner : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitForSeconds(_time);
+            yield return new WaitForSeconds(_params.Time);
 
             var newPrefab = _pool.GetFreeElement();
 
             newPrefab.transform.position = Camera.main.GetRandomPosition(50);
-
-            try
-            {
-               // var container = ProjectContext.Instance.Container;container.Inject(newPrefab);
-            }
-            finally
-            {
-                
-            }
 
             
 
