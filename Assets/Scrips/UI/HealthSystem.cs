@@ -4,7 +4,7 @@ using Zenject;
 using ZombieTestProject.Core;
 using System;
 
-public class HeartsSystem : MonoBehaviour
+public class HealthSystem : MonoBehaviour
 {
    private int _currentIndex;
 
