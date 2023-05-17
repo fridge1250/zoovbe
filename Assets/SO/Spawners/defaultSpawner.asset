@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876112e55a7750ea6a60b458c4f28a99, type: 3}
   m_Name: defaultSpawner
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 0}
-  _startCount: 1
-  _time: 0
-  _offset: 0.01
+  _prefab: {fileID: 7053961270096927889, guid: 3813b9341bdc14c4b9318da365740b3f, type: 3}
+  _startCount: 60
+  _time: 3
+  _offset: 1

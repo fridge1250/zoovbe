@@ -142,6 +142,7 @@ namespace Siphoin.Pooling
                 }
 
                 gameObject.SetActive(false);
+                
                 _pool.Add(array[i]);
             }
         }

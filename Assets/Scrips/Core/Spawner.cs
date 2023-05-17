@@ -14,6 +14,11 @@ public class Spawner : MonoInstaller
     private Enemy _prefab;
 
     [SerializeField] private SpawnerParams _params;
+
+    private Player _player;
+
+    [Inject]
+    private void Init (Player player) => _player = player;
     
     public override void InstallBindings() 
     {
@@ -39,22 +44,27 @@ public class Spawner : MonoInstaller
         }
 
         _pool = new PoolMono<Enemy>(_prefab, enemies, container);
+
+        _player.OnDead += StopAllCoroutines;
     }
 
-    private void Start()
+    private new void Start()
     {
-
         ActivateSpawn();
     }
 
     private void OnDisable() 
     {
         StopAllCoroutines();
+
+        _player.OnDead -= StopAllCoroutines;
     }
 
     private void OnEnable() 
     {
         ActivateSpawn();
+
+        _player.OnDead += StopAllCoroutines;
     }
 
     private void ActivateSpawn () 

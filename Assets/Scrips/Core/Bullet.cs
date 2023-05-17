@@ -13,7 +13,10 @@ public class Bullet : MonoBehaviour, IBullet
 
     [SerializeField, Min(1)] private int _damage = 1;
 
-    private void OnEnable ()
+        public float Force => _force;
+        public int Damage => _damage;
+
+        private void OnEnable ()
         {
 
             if (!_body)

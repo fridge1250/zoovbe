@@ -12,9 +12,13 @@ namespace ZombieTestProject.Core.Enemies
 
         public int Health => _health;
 
+        public bool IsDead => _isDead;
+
         public event Action OnHit;
+        public event Action OnDead;
 
         [SerializeField] private ZombieData _data;
+        private bool _isDead;
 
         [Inject]
         private void Init (Player player) => SetPlayer(player);
@@ -27,23 +31,23 @@ namespace ZombieTestProject.Core.Enemies
             }
 
             _health = _data.Health;
+
+            Speed = _data.Speed;
         }
 
-        public void Attack()
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public void Hit(int value)
+        public override void Hit(int value)
         {
-            _health = Mathf.Clamp(_health - value, 0, int.MaxValue);
+            _health = Mathf.Clamp(_health - value, 0, _data.Health);
 
             OnHit?.Invoke();
-        }
-
-        public void Move()
-        {
-            throw new System.NotImplementedException();
+            
+            if (_health == 0) 
+            {
+                OnDead?.Invoke();
+                
+                gameObject.SetActive(false);
+            }
         }
     }
 }

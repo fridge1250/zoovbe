@@ -31,7 +31,7 @@ using ZombieTestProject.Core.Enemies;
         {
             while (true) 
             {
-                _player.Hit(1);
+                _player?.Hit(1);
 
                 yield return new WaitForSeconds(1f); 
 

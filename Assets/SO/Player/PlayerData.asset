@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df91d6b2750b076068b59a47f47c39dc, type: 3}
-  m_Name: startZombieParams
+  m_Script: {fileID: 11500000, guid: 84108dd8fc59c6fadbdfbd2457ddcae8, type: 3}
+  m_Name: PlayerData
   m_EditorClassIdentifier: 
   _health: 3
-  _speed: 2
-  _distanceAttack: 0.1
+  _speed: 0.1
