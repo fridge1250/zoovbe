@@ -1,9 +1,18 @@
 namespace ZombieTestProject.Core
 {
-using UnityEngine;
-    
-    public class Player : MonoBehaviour 
+    using System;
+    using UnityEngine;
+using ZombieTestProject.Interfaces;
+
+    public class Player : MonoBehaviour, IHitObject
     {
-        
+        public int Health => 3;
+
+        public event Action OnHit;
+
+        public void Hit(int value)
+        {
+            OnHit?.Invoke();
+        }
     }
 }

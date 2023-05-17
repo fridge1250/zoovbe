@@ -10,8 +10,6 @@ using ZombieTestProject.Core;
         public override void InstallBindings()
         {        
             Container.Bind<Player>().FromComponentOn(_player.gameObject).AsSingle();
-
-            Debug.Log(3232);
         }
     }
 }

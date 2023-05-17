@@ -10,19 +10,6 @@ public class MovePlayer : MonoBehaviour
     [SerializeField] Vector2 Movement;
     [SerializeField] Vector2 MousePos;
 
-    
-    private void OnCollisionEnter2D(Collision2D coll)
-    {
-        if(coll.transform.tag == "zoombe")
-        {
-            HeartsSystem.health--;
-            if(HeartsSystem.health < 0)
-            {
-                gameObject.SetActive(false);
-            }
-        }
-    }
-
     void Update()
     {
         Movement.x = Input.GetAxisRaw("Horizontal");

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1721094642484663533}
   - component: {fileID: 8801479913084776582}
   - component: {fileID: 653527490724078395}
+  - component: {fileID: 5043267198657130848}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: zoombe
@@ -147,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18969fdd0e853b12819b73d3318ea37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 0}
+  _player: {fileID: 0}
   movement: {x: 0, y: 0}
   speed: 5
   _data: {fileID: 11400000, guid: ca1ce4c10342334d88a228df3c1d6ef8, type: 2}
@@ -161,5 +162,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b67b2fade1c5af2f4ae032889069c021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5043267198657130848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7053961270096927889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b65e9496c1885abe813b0fb0d12c760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
