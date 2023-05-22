@@ -18,13 +18,16 @@ using ZombieTestProject.Core.Enemies;
         {
             if (other.TryGetComponent(out Player _)) 
             {
+                _currentCoroutine = StartCoroutine(Attack());
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D other) 
+        {
                 if (_currentCoroutine != null) 
                 {
                     StopCoroutine(_currentCoroutine);
                 }
-
-                _currentCoroutine = StartCoroutine(Attack());
-            }
         }
 
         private IEnumerator Attack () 

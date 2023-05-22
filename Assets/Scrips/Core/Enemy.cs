@@ -3,13 +3,16 @@ namespace ZombieTestProject.Core
 using UnityEngine;
 using System;
 using ZombieTestProject.Interfaces;
+using ZombieTestProject.SO;
+    using ZombieTestProject.Exceptions;
 
-    public abstract class Enemy : MonoBehaviour, IEnemy
+    public abstract class Enemy : MonoBehaviour, IEnemy, IReceiverData<EnemyData>
     {
-    [SerializeField] private Player _player;
-    private Rigidbody2D _rigidbody;
-    [SerializeField] private Vector2 _movement;
-    [SerializeField, Min(0.1f)] private float _speed = 5f;
+        private Vector2 _movement;
+        private Player _player;
+        private Rigidbody2D _rigidbody;
+        private EnemyData _currentData;
+        private float _speed = 5f;
 
         private int _health;
         private bool _isDead;
@@ -21,7 +24,7 @@ using ZombieTestProject.Interfaces;
 
         public bool IsDead => _isDead;
 
-        public float Speed { get => _speed; protected set => _speed = value; }
+        public float Speed => _speed;
 
         protected void SetPlayer(Player player) => _player = player;
 
@@ -56,7 +59,7 @@ using ZombieTestProject.Interfaces;
 
             Move(_movement);
 
-        _rigidbody.rotation = angle;
+            _rigidbody.rotation = angle;
         }
     }
     private void Move(Vector2 direction)
@@ -65,12 +68,37 @@ using ZombieTestProject.Interfaces;
 
     }
 
-        public virtual void Hit(int value)
+    public void SetData (EnemyData data) 
+    {
+        if (data is null)
         {
+            throw new ArgumentNullException("data enemy SO is null");
+        }
+
+        if (_currentData != null)
+        {
+            throw new GameLogicException("enemy data before seted");
+        }
+
+        _currentData = data;
+
+        _health = data.Health;
+
+        _speed = data.Speed;
+
+
+    }
+
+        public void Hit(int value)
+        {
+            _health = Mathf.Clamp(Health - value, 0, _currentData.Health);
+
             OnHit?.Invoke();
             
             if (_health == 0) 
             {
+                OnDead?.Invoke();
+                
                 gameObject.SetActive(false);
             }
         }

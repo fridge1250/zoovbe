@@ -6,7 +6,7 @@ using System;
 
 public class HealthSystem : MonoBehaviour
 {
-   private int _currentIndex;
+   private int _currentIndex = -1;
 
    private Image[] _healths;
 
@@ -42,9 +42,9 @@ public class HealthSystem : MonoBehaviour
 
     private void RefreshStatus()
     {
-        _healths[_currentIndex].sprite = _emptyLive;
-
         _currentIndex = Mathf.Clamp(_currentIndex + 1, 0, _healths.Length - 1);
+        
+        _healths[_currentIndex].sprite = _emptyLive;
     }
 
     private void OnDestroy() 

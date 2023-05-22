@@ -3,9 +3,9 @@ namespace ZombieTestProject.Core
 using System;
 using UnityEngine;
 using ZombieTestProject.Interfaces;
-    using ZombieTestProject.SO;
+using ZombieTestProject.SO;
 
-    public class Player : MonoBehaviour, IHitObject
+    public class Player : MonoBehaviour, IPlayer
     {
         [SerializeField] private PlayerData _startStats;
         [SerializeField, Min(0)] private int _currentHealth;
@@ -15,6 +15,8 @@ using ZombieTestProject.Interfaces;
         public int Health => _currentHealth;
 
         public bool IsDead => _isDead;
+
+        public PlayerData Data => _startStats;
 
         public event Action OnHit;
         public event Action OnDead;
